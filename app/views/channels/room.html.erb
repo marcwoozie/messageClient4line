@@ -1,0 +1,23 @@
+<h1><%= @user.name %>（<%= @user.line_display_name %>）</h1>
+
+<%= form_with(model: @message, local: true, url: channels_push_path) do |form| %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id, id: :message_user_id, value: @user.id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :channel_id %>
+    <%= form.text_field :channel_id, id: :message_channel_id, value: 1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :text %>
+    <%= form.text_area :text, id: :message_text %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

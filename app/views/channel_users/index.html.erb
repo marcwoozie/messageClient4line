@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Channel Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Channel</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @channel_users.each do |channel_user| %>
+      <tr>
+        <td><%= channel_user.channel_id %></td>
+        <td><%= channel_user.user_id %></td>
+        <td><%= link_to 'Show', channel_user %></td>
+        <td><%= link_to 'Edit', edit_channel_user_path(channel_user) %></td>
+        <td><%= link_to 'Destroy', channel_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Channel User', new_channel_user_path %>

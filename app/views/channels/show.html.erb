@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @channel.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @channel.description %>
+</p>
+
+<p>
+  <strong>Channel:</strong>
+  <%= @channel.channel_id %>
+</p>
+
+<p>
+  <strong>Channel secret:</strong>
+  <%= @channel.channel_secret %>
+</p>
+
+<p>
+  <strong>App type:</strong>
+  <%= @channel.app_type %>
+</p>
+
+<p>
+  <strong>Access token:</strong>
+  <%= @channel.access_token %>
+</p>
+
+<h4>channel users</h4>
+<ul>
+  <% @channel.channel_users.each do |channel_user| %>
+    <li><%= channel_user.user.name %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_channel_path(@channel) %> |
+<%= link_to 'Back', channels_path %>

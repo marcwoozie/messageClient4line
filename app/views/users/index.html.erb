@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Line display name</th>
+      <th>Line user</th>
+      <th>Line picture url</th>
+      <th>Line status message</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.line_display_name %></td>
+        <td><%= user.line_user_id %></td>
+        <td><%= user.line_picture_url %></td>
+        <td><%= user.line_status_message %></td>
+        <td><%= link_to 'Room', channel_room_path(user) %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>

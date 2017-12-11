@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  channel_id: 
+  channel_secret: MyString
+  app_type: 
+  access_token: MyString
+
+two:
+  name: MyString
+  description: MyString
+  channel_id: 
+  channel_secret: MyString
+  app_type: 
+  access_token: MyString

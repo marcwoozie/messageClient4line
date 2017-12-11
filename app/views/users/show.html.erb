@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Line display name:</strong>
+  <%= @user.line_display_name %>
+</p>
+
+<p>
+  <strong>Line user:</strong>
+  <%= @user.line_user_id %>
+</p>
+
+<p>
+  <strong>Line picture url:</strong>
+  <%= @user.line_picture_url %>
+</p>
+
+<p>
+  <strong>Line status message:</strong>
+  <%= @user.line_status_message %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
