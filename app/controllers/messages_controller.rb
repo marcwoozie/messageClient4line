@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
 
   def receive
     unless is_validate_signature
-      return render plain: "NO", status: 500
+      return render plain: "NO", status: 413
     end
 
     event = params["events"][0]
