@@ -1,6 +1,5 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
-  include Linebot
 
   # GET /channels
   # GET /channels.json
@@ -30,8 +29,9 @@ class ChannelsController < ApplicationController
   def push
     channel = Channel.find(params[:message][:channel_id])
     user = User.find params[:message][:user_id]
-    client = set_line_client channel.channel_secret, channel.access_token
-    only_push_text_message client, user.line_user_id, params[:message][:text]
+    client = Classes::Line::Client.new channel.channel_secret, channel.access_token
+    client.set_sender_id user.line_user_id
+    client.only_push_text_message params[:message][:text]
   end
 
   # POST /channels
