@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
 
   def receive
     unless is_validate_signature
-      render :nothing => true, status: 470
+      return render plain: "NO", status: 500
     end
 
     event = params["events"][0]
@@ -77,7 +77,7 @@ class MessagesController < ApplicationController
       logger.info({fail: res})
     end
 
-    render :nothing => true, status: :ok
+    render plain: "OK", status: 200
   end
 
   # DELETE /messages/1
