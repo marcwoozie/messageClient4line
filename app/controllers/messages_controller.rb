@@ -67,7 +67,8 @@ class MessagesController < ApplicationController
       output_text = input_text
     end
 
-    client = LineClient.new(CHANNEL_ACCESS_TOKEN, OUTBOUND_PROXY)
+    channel = Channel.first
+    client = Classes::Line::Client.new channel.channel_secret, channel.access_token
     res = client.reply(replyToken, output_text)
 
     if res.status == 200
@@ -103,7 +104,8 @@ class MessagesController < ApplicationController
     def is_validate_signature
       signature = request.headers["X-LINE-Signature"]
       http_request_body = request.raw_post
-      hash = OpenSSL::HMAC::digest(OpenSSL::Digest::SHA256.new, CHANNEL_SECRET, http_request_body)
+      channel = Channel.first
+      hash = OpenSSL::HMAC::digest(OpenSSL::Digest::SHA256.new, channel.channel_secret, http_request_body)
       signature_answer = Base64.strict_encode64(hash)
       signature == signature_answer
     end
