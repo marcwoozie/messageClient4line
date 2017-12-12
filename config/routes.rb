@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :channel_users
 
   post 'channels/push' => 'channels#push'
+  post 'messages/receive' => 'messages#receive'
   get 'channels/room/:id' => 'channels#room', as: :channel_room
   resources :channels
 
