@@ -1,6 +1,6 @@
 require 'line/bot'
 
-module Utility::Line
+module Classes::Line
   class Client
 
     @channel_secret = nil

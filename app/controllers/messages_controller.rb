@@ -68,7 +68,7 @@ class MessagesController < ApplicationController
     end
 
     channel = Channel.first
-    client = Utility::Line::Client.new channel.channel_secret, channel.access_token
+    client = Classes::Line::Client.new channel.channel_secret, channel.access_token
     res = client.reply(replyToken, output_text)
 
     if res.status == 200

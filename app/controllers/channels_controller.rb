@@ -29,7 +29,7 @@ class ChannelsController < ApplicationController
   def push
     channel = Channel.find(params[:message][:channel_id])
     user = User.find params[:message][:user_id]
-    client = Utility::Line::Client.new channel.channel_secret, channel.access_token
+    client = Classes::Line::Client.new channel.channel_secret, channel.access_token
     client.set_sender_id user.line_user_id
     if client.only_push_text_message params[:message][:text]
       @message = Message.new({
