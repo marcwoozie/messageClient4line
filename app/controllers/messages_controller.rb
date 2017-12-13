@@ -72,9 +72,14 @@ class MessagesController < ApplicationController
     res = client.reply_message(replyToken, output_text)
 
     if res.status == 200
-      logger.info({success: res})
-    else
-      logger.info({fail: res})
+      user = User.where(:line_user_id => event['source']['userId']).first
+      if user
+        @message = Message.new({
+          :user_id => user.id,
+          :channel_id => channel.id,
+          :text => output_text
+        })
+      end
     end
 
     render plain: "OK", status: 200
