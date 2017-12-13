@@ -71,7 +71,7 @@ class MessagesController < ApplicationController
     client = Classes::Line::Client.new channel.channel_secret, channel.access_token
     res = client.reply_message(replyToken, output_text)
     p "====================="
-    p res
+    p res.inspect
     p "====================="
     if res.status == 200
       user = User.where(:line_user_id => event['source']['userId']).first
