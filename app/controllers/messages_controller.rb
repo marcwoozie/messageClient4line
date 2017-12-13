@@ -70,15 +70,14 @@ class MessagesController < ApplicationController
     channel = Channel.first
     client = Classes::Line::Client.new channel.channel_secret, channel.access_token
     res = client.reply_message(replyToken, output_text)
-    if res
-      user = User.where(:line_user_id => event['source']['userId']).first
-      if user
-        @message = Message.new({
-          :user_id => user.id,
-          :channel_id => channel.id,
-          :text => output_text
-        })
-      end
+    
+    user = User.where(:line_user_id => event['source']['userId']).first
+    if user
+      @message = Message.new({
+        :user_id => user.id,
+        :channel_id => channel.id,
+        :text => output_text
+      })
     end
 
     render plain: "OK", status: 200
