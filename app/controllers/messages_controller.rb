@@ -70,7 +70,7 @@ class MessagesController < ApplicationController
     channel = Channel.first
     client = Classes::Line::Client.new channel.channel_secret, channel.access_token
     res = client.reply_message(replyToken, output_text)
-    
+
     user = User.where(:line_user_id => event['source']['userId']).first
     if user
       @message = Message.new({
@@ -78,6 +78,7 @@ class MessagesController < ApplicationController
         :channel_id => channel.id,
         :text => output_text
       })
+      @message.save
     end
 
     render plain: "OK", status: 200
