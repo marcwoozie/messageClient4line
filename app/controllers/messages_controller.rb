@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
 
   def receive
     unless is_validate_signature
-      return render json: {status: 500}, status: 200
+      return render json: {status: 400, message: 'Bad Request'}, status: 200
     end
 
     event = params["events"][0]
