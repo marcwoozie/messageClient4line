@@ -31,5 +31,13 @@ module Classes::Line
       @client.push_message(@sender_id, message)
     end
 
+    def reply_message reply_token, text
+      message = {
+        type: 'text',
+        text: text
+      }      
+      @client.reply_message(reply_token, message)
+    end
+
   end
 end
