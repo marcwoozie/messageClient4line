@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
 
   def receive
     unless is_validate_signature
-      return render plain: "NO", status: 200
+      return render json: {status: 500}, status: 200
     end
 
     event = params["events"][0]
@@ -80,8 +80,7 @@ class MessagesController < ApplicationController
       })
       @message.save
     end
-
-    render plain: "OK", status: 200
+    render json: {status: 200}, status: 200
   end
 
   # DELETE /messages/1
