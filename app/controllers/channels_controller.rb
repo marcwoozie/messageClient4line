@@ -23,6 +23,7 @@ class ChannelsController < ApplicationController
 
   def room
     @user = User.find params[:id]
+    @channel = Channel.first
     @message = Message.new
   end
 
