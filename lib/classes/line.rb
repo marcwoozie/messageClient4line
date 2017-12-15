@@ -39,5 +39,29 @@ module Classes::Line
       @client.reply_message(reply_token, message)
     end
 
+    def push_location title, address, lat, lng
+      return false if @client.nil?
+      return false if @sender_id.nil?
+      message = {
+        type: "location",
+        title: title,
+        address: address,
+        latitude: lat,
+        longitude: lng
+      }
+      @client.push_message(@sender_id, message)      
+    end
+
+    def push_image original_content_url, preview_img_url
+      return false if @client.nil?
+      return false if @sender_id.nil?
+      message = {
+        type: "image",
+        originalContentUrl: original_content_url,
+        previewImageUrl: preview_img_url
+      }
+      @client.push_message(@sender_id, message)      
+    end
+
   end
 end

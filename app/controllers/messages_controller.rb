@@ -71,16 +71,21 @@ class MessagesController < ApplicationController
     client = Classes::Line::Client.new channel.channel_secret, channel.access_token
     res = client.reply_message(replyToken, output_text)
 
-    user = User.where(:line_user_id => event['source']['userId']).first
-    if user
-      @message = Message.new({
-        :user_id => user.id,
-        :channel_id => channel.id,
-        :text => output_text
-      })
-      @message.save
+    case res
+    when Net::HTTPSuccess then
+      user = User.where(:line_user_id => event['source']['userId']).first
+      if user
+        @message = Message.new({
+          :user_id => user.id,
+          :channel_id => channel.id,
+          :text => output_text
+        })
+        @message.save
+      end
+      render json: {status: 200}, status: 200      
+    else
+      render json: {status: 500}, status: 200      
     end
-    render json: {status: 200}, status: 200
   end
 
   # DELETE /messages/1
