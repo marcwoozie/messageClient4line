@@ -36,6 +36,8 @@ gem 'jbuilder', '~> 2.5'
 # add 
 gem "paranoia", "~> 2.2"
 gem 'line-bot-api'
+gem 'bower-rails'
+gem 'font-awesome-rails'
 
 gem 'rails_12factor'
 

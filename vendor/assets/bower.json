@@ -1,0 +1,7 @@
+{
+  "name": "dsl-generated-dependencies",
+  "dependencies": {
+    "jquery": "latest",
+    "admin-lte": "2.0.5"
+  }
+}

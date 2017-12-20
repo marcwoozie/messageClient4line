@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+@import "admin-lte/bootstrap/css/bootstrap";
+@import "admin-lte/dist/css/AdminLTE";
+@import "admin-lte/dist/css/skins/skin-red";
+@import "font-awesome";

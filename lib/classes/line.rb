@@ -63,5 +63,16 @@ module Classes::Line
       @client.push_message(@sender_id, message)      
     end
 
+    def push_sticker package_id, sticker_id
+      return false if @client.nil?
+      return false if @sender_id.nil?
+      message = {
+        type: "sticker",
+        packageId: package_id,
+        stickerId: sticker_id
+      }
+      @client.push_message(@sender_id, message)      
+    end
+
   end
 end

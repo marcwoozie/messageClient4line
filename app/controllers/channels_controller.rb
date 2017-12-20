@@ -23,6 +23,7 @@ class ChannelsController < ApplicationController
 
   def room
     @user = User.find params[:id]
+    @messages = Message.where(:user_id => @user.id).order(created_at: 'DESC')
     @channel = Channel.first
     @message = Message.new
   end

@@ -67,8 +67,7 @@ class MessagesController < ApplicationController
       output_text = input_text
     end
 
-    channel = Channel.first
-    client = Classes::Line::Client.new channel.channel_secret, channel.access_token
+    client = Classes::Line::Client.new @channel.channel_secret, @channel.access_token
     res = client.reply_message(replyToken, output_text)
 
     case res
@@ -77,7 +76,7 @@ class MessagesController < ApplicationController
       if user
         @message = Message.new({
           :user_id => user.id,
-          :channel_id => channel.id,
+          :channel_id => @channel.id,
           :text => output_text
         })
         @message.save
@@ -112,10 +111,16 @@ class MessagesController < ApplicationController
     def is_validate_signature
       signature = request.headers["X-LINE-Signature"]
       http_request_body = request.raw_post
-      channel = Channel.first
+      channel = Channel.where(:channel_secret => Base64.decode64(signature)).first
+      return false if channel.nil?
       hash = OpenSSL::HMAC::digest(OpenSSL::Digest::SHA256.new, channel.channel_secret, http_request_body)
       signature_answer = Base64.strict_encode64(hash)
-      signature == signature_answer
+      if signature == signature_answer
+        @channel = channel
+        return true
+      else
+        return false
+      end
     end
 
 end
