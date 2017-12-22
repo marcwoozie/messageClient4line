@@ -111,6 +111,9 @@ class MessagesController < ApplicationController
     def is_validate_signature
       signature = request.headers["X-LINE-Signature"]
       http_request_body = request.raw_post
+      p "===================="
+      p signature
+      p "===================="
       channel = Channel.where(:channel_secret => Base64.decode64(signature)).first
       return false if channel.nil?
       hash = OpenSSL::HMAC::digest(OpenSSL::Digest::SHA256.new, channel.channel_secret, http_request_body)
